@@ -1,5 +1,6 @@
 package com.aluguelbicicleta.aluguelbicicleta.Model;
 
+import com.aluguelbicicleta.aluguelbicicleta.Model.enums.StatusBicicleta;
 import jakarta.persistence.*;
 
 @Entity
@@ -14,8 +15,9 @@ public class BicicletaModel {
     @Column(name = "modelo", nullable = false)
     private String modelo;
 
-    @Column(name = "disponivel", nullable = false)
-    private Boolean disponivel;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false)
+    private StatusBicicleta status;
 
     public BicicletaModel() {
     }
@@ -32,11 +34,11 @@ public class BicicletaModel {
         this.modelo = modelo;
     }
 
-    public Boolean getDisponivel() {
-        return disponivel;
+    public StatusBicicleta getStatus() {
+        return status;
     }
 
-    public void setDisponivel(Boolean disponivel) {
-        this.disponivel = disponivel;
+    public void setStatus(StatusBicicleta status) {
+        this.status = status;
     }
 }
