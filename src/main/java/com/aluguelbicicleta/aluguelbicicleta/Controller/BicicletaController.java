@@ -1,4 +1,4 @@
 package com.aluguelbicicleta.aluguelbicicleta.Controller;
 
-public class BiciclettaController {
+public class BicicletaController {
 }
