@@ -1,25 +1,23 @@
 package com.aluguelbicicleta.aluguelbicicleta.Model;
 
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name = "clientes")
-@JsonPropertyOrder({ "id", "nome", "cpf", "telefone" })
+@Table(name = "cliente")
 public class ClienteModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id_cliente")
+    @Column(name = "id")
     private Long id;
 
-    @Column(name = "nome")
+    @Column(name = "nome", nullable = false)
     private String nome;
 
-    @Column(name = "cpf")
+    @Column(name = "cpf", nullable = false)
     private String cpf;
 
-    @Column(name = "telefone")
+    @Column(name = "telefone", length = 15, nullable = false)
     private String telefone;
 
     public ClienteModel() {
@@ -27,10 +25,6 @@ public class ClienteModel {
 
     public Long getId() {
         return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getNome() {
