@@ -1,4 +1,4 @@
-package com.aluguelbicicleta.aluguelbicicleta.Controller;
+package com.aluguelbicicleta.aluguelbicicleta.controller;
 
 import com.aluguelbicicleta.aluguelbicicleta.Model.ClienteModel;
 import com.aluguelbicicleta.aluguelbicicleta.Repository.ClienteRepository;
