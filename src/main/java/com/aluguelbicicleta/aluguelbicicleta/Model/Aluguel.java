@@ -1,24 +1,24 @@
-package com.aluguelbicicleta.aluguelbicicleta.Model;
+package com.aluguelbicicleta.aluguelbicicleta.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "aluguel")
-public class AluguelModel {
+public class Aluguel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "id_cliente", nullable = false)
-    private ClienteModel cliente;
+    private Cliente cliente;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(optional = false)
     @JoinColumn(name = "id_bicicleta", nullable = false)
-    private BicicletaModel bicicleta;
+    private Bicicleta bicicleta;
 
     @Column(name = "data_inicio", nullable = false)
     private LocalDateTime dataInicio;
@@ -29,26 +29,26 @@ public class AluguelModel {
     @Column(name = "valor")
     private Double valor;
 
-    public AluguelModel() {
+    public Aluguel() {
     }
 
     public Long getId() {
         return id;
     }
 
-    public ClienteModel getCliente() {
+    public Cliente getCliente() {
         return cliente;
     }
 
-    public void setCliente(ClienteModel cliente) {
+    public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
 
-    public BicicletaModel getBicicleta() {
+    public Bicicleta getBicicleta() {
         return bicicleta;
     }
 
-    public void setBicicleta(BicicletaModel bicicleta) {
+    public void setBicicleta(Bicicleta bicicleta) {
         this.bicicleta = bicicleta;
     }
 

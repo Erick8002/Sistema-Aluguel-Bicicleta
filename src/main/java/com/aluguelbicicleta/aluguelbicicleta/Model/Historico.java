@@ -1,4 +1,4 @@
-package com.aluguelbicicleta.aluguelbicicleta.Model;
+package com.aluguelbicicleta.aluguelbicicleta.model;
 
 import jakarta.persistence.*;
 
@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "historico")
-public class HistoricoModel {
+public class Historico {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,23 +19,23 @@ public class HistoricoModel {
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_aluguel", nullable = false)
-    private AluguelModel aluguel;
+    private Aluguel aluguel;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_cliente", nullable = false)
-    private ClienteModel cliente;
+    private Cliente cliente;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "id_bicicleta", nullable = false)
-    private BicicletaModel bicicleta;
+    private Bicicleta bicicleta;
 
     @Column(name = "valor")
-    private BigDecimal valor;
+    private Double valor;
 
     @Column(name = "data_hora", nullable = false)
     private LocalDateTime dataHora;
 
-    public HistoricoModel() {
+    public Historico() {
     }
 
     public Long getId() {
@@ -50,35 +50,35 @@ public class HistoricoModel {
         this.tipo = tipo;
     }
 
-    public AluguelModel getAluguel() {
+    public Aluguel getAluguel() {
         return aluguel;
     }
 
-    public void setAluguel(AluguelModel aluguel) {
+    public void setAluguel(Aluguel aluguel) {
         this.aluguel = aluguel;
     }
 
-    public ClienteModel getCliente() {
+    public Cliente getCliente() {
         return cliente;
     }
 
-    public void setCliente(ClienteModel cliente) {
+    public void setCliente(Cliente cliente) {
         this.cliente = cliente;
     }
 
-    public BicicletaModel getBicicleta() {
+    public Bicicleta getBicicleta() {
         return bicicleta;
     }
 
-    public void setBicicleta(BicicletaModel bicicleta) {
+    public void setBicicleta(Bicicleta bicicleta) {
         this.bicicleta = bicicleta;
     }
 
-    public BigDecimal getValor() {
+    public Double getValor() {
         return valor;
     }
 
-    public void setValor(BigDecimal valor) {
+    public void setValor(Double valor) {
         this.valor = valor;
     }
 

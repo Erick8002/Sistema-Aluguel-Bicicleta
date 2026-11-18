@@ -1,11 +1,11 @@
-package com.aluguelbicicleta.aluguelbicicleta.Model;
+package com.aluguelbicicleta.aluguelbicicleta.model;
 
 import com.aluguelbicicleta.aluguelbicicleta.Model.enums.StatusBicicleta;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "bicicleta")
-public class BicicletaModel {
+public class Bicicleta {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -19,7 +19,7 @@ public class BicicletaModel {
     @Column(name = "status", nullable = false)
     private StatusBicicleta status;
 
-    public BicicletaModel() {
+    public Bicicleta() {
     }
 
     public Long getId() {

@@ -1,10 +1,10 @@
-package com.aluguelbicicleta.aluguelbicicleta.Model;
+package com.aluguelbicicleta.aluguelbicicleta.model;
 
 import jakarta.persistence.*;
 
 @Entity
 @Table(name = "cliente")
-public class ClienteModel {
+public class Cliente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,13 +14,13 @@ public class ClienteModel {
     @Column(name = "nome", nullable = false)
     private String nome;
 
-    @Column(name = "cpf", nullable = false)
+    @Column(name = "cpf", length = 11, nullable = false, unique = true)
     private String cpf;
 
-    @Column(name = "telefone", length = 15, nullable = false)
+    @Column(name = "telefone", length = 20, nullable = false)
     private String telefone;
 
-    public ClienteModel() {
+    public Cliente() {
     }
 
     public Long getId() {
