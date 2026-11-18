@@ -9,7 +9,7 @@ public record HistoricoResponse(
         Long aluguelId,
         Long clienteId,
         Long bicicletaId,
-        BigDecimal valor,
+        Double valor,
         LocalDateTime dataHora
 ) {
 }

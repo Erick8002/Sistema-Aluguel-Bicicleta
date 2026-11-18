@@ -4,10 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class AluguelbicicletaApplication {
+public class AluguelBicicletaApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(AluguelbicicletaApplication.class, args);
+	static void main(String[] args) {
+		SpringApplication.run(AluguelBicicletaApplication.class, args);
 	}
-
 }
