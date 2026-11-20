@@ -1,0 +1,497 @@
+{
+  "info": {
+    "_postman_id": "f8e379d0-f46a-46df-b68c-0d7bd9930623",
+    "name": "AluguelBicicleta",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "53320766",
+    "_collection_link": "https://go.postman.co/collection/53320766-f8e379d0-f46a-46df-b68c-0d7bd9930623?source=collection_link"
+  },
+  "item": [
+    {
+      "name": "Cliente",
+      "item": [
+        {
+          "name": "listarClientes",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/clientes",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "clientes"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "listarPorId",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/clientes/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "clientes",
+                "1"
+              ]
+            },
+            "description": "Generated from cURL: curl --request GET '{{base_url}}/clientes/1'"
+          },
+          "response": []
+        },
+        {
+          "name": "cadastrarCliente",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-CSRF-TOKEN",
+                "value": "d-gHX8EQy_Do_JsO826pk9jGlPlfQgvNLatPhdN0HvjC52k-Eo03PaIn-ZPFmvg3lkOdp72iuZs9cGrgGpp95rJNKsj23gxd"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"nome\": \"João Pedro Alves\",\r\n    \"cpf\": \"12345678902\",\r\n    \"telefone\": \"41977778888\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/clientes",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "clientes"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "atualizarCliente",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/clientes/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "clientes",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "deletarCliente",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/clientes/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "clientes",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Bicicleta",
+      "item": [
+        {
+          "name": "listarBicicletas",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/bicicletas",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "bicicletas"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "listarPorId",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/bicicletas/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "bicicletas",
+                "1"
+              ]
+            },
+            "description": "Generated from cURL: curl --request GET '{{base_url}}/bicicletas/1'"
+          },
+          "response": []
+        },
+        {
+          "name": "cadastrarBicicleta",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/bicicletas",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "bicicletas"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "atualizarBicicleta",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/bicicletas/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "bicicletas",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "deletarBicicleta",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/bicicletas/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "bicicletas",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "CategoriaBicicleta",
+      "item": [
+        {
+          "name": "listarCategorias",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/categorias-bicicleta",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "categorias-bicicleta"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "listarPorId",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/categorias/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "categorias",
+                "1"
+              ]
+            },
+            "description": "Generated from cURL: curl --request GET '{{base_url}}/categorias/1'"
+          },
+          "response": []
+        },
+        {
+          "name": "cadastrarCategoria",
+          "request": {
+            "method": "POST",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/categorias-bicicleta",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "categorias-bicicleta"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "atualizarCategoria",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/categorias-bicicleta/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "categorias-bicicleta",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "deletarCategoria",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/bicicletas/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "bicicletas",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Aluguel",
+      "item": [
+        {
+          "name": "listarAlugueis",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/alugueis",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "alugueis"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "listarPorId",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/alugueis/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "alugueis",
+                "1"
+              ]
+            },
+            "description": "Generated from cURL: curl --request GET '{{base_url}}/alugueis/1'"
+          },
+          "response": []
+        },
+        {
+          "name": "cadastrarAluguel",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "X-CSRF-TOKEN",
+                "value": "d-gHX8EQy_Do_JsO826pk9jGlPlfQgvNLatPhdN0HvjC52k-Eo03PaIn-ZPFmvg3lkOdp72iuZs9cGrgGpp95rJNKsj23gxd"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"nome\": \"João Pedro Alves\",\r\n    \"cpf\": \"12345678902\",\r\n    \"telefone\": \"41977778888\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/alugueis",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "alugueis"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "cadastrarAluguel",
+          "request": {
+            "method": "PUT",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/alugueis/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "alugueis",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "deletarAluguel",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{base_url}}/alugueis/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "alugueis",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Historico",
+      "item": [
+        {
+          "name": "listarHistoricos",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/historicos",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "historicos"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "listarPorId",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{base_url}}/historicos/1",
+              "host": [
+                "{{base_url}}"
+              ],
+              "path": [
+                "historicos",
+                "1"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": ""
+    }
+  ]
+}
