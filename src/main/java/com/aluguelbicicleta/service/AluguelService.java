@@ -108,9 +108,8 @@ public class AluguelService {
 
         LocalDateTime dataFim = LocalDateTime.now();
 
-        long minutos = ChronoUnit.MINUTES.between(aluguel.getDataInicio(), dataFim);
-        long horasIniciadas = Math.max(1, (minutos + 59) / 60);
-        double valor = horasIniciadas * aluguel.getValorHoraAplicado();
+        long minutos = Math.max(1, (ChronoUnit.SECONDS.between(aluguel.getDataInicio(), dataFim) + 59) / 60);
+        double valor = Math.round(minutos * aluguel.getValorHoraAplicado() / 60.0 * 100.0) / 100.0;
 
         aluguel.setDataFim(dataFim);
         aluguel.setValor(valor);
