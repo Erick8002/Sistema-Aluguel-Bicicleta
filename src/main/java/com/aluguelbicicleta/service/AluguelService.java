@@ -18,6 +18,9 @@ import com.aluguelbicicleta.repository.ClienteRepository;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -43,8 +46,34 @@ public class AluguelService {
         this.eventPublisher = eventPublisher;
     }
 
-    public List<Aluguel> listarAlugueis() {
-        return aluguelRepository.findAllByOrderByIdAsc();
+    public List<Aluguel> listarAlugueis(Boolean emAberto, Long clienteId, Integer page, Integer size) {
+
+        Pageable pageable = criarPaginacao(page, size);
+        boolean somenteAbertos = Boolean.TRUE.equals(emAberto);
+
+        if (clienteId != null && somenteAbertos) {
+            return aluguelRepository.findByCliente_IdAndDataFimIsNull(clienteId, pageable);
+        }
+
+        if (clienteId != null) {
+            return aluguelRepository.findByCliente_Id(clienteId, pageable);
+        }
+
+        if (somenteAbertos) {
+            return aluguelRepository.findByDataFimIsNull(pageable);
+        }
+
+        return aluguelRepository.findAll(pageable).getContent();
+    }
+
+    private Pageable criarPaginacao(Integer page, Integer size) {
+        Sort ordenacao = Sort.by("id");
+
+        if (page == null || size == null) {
+            return Pageable.unpaged(ordenacao);
+        }
+
+        return PageRequest.of(Math.max(page, 0), Math.max(size, 1), ordenacao);
     }
 
     public Aluguel buscarPorId(Long id) {

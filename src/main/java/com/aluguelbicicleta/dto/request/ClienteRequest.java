@@ -18,7 +18,7 @@ public record ClienteRequest(
         String cpf,
 
         @NotBlank(message = "O telefone é obrigatório.")
-        @Size(max = 20, message = "O telefone deve ter no máximo 15 caracteres.")
+        @Size(max = 20, message = "O telefone deve ter no máximo 20 caracteres.")
         String telefone
 ) {
 }

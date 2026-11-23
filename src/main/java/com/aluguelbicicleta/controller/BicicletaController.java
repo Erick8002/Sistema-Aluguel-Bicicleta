@@ -3,7 +3,8 @@ package com.aluguelbicicleta.controller;
 import com.aluguelbicicleta.dto.request.BicicletaRequest;
 import com.aluguelbicicleta.dto.response.BicicletaResponse;
 import com.aluguelbicicleta.service.BicicletaService;
-
+import com.aluguelbicicleta.dto.request.StatusBicicletaRequest;
+import com.aluguelbicicleta.model.enums.StatusBicicleta;
 import jakarta.validation.Valid;
 
 import org.springframework.http.HttpStatus;
@@ -22,8 +23,12 @@ public class BicicletaController {
     }
 
     @GetMapping
-    public List<BicicletaResponse> listarBicicletas() {
-        return bicicletaService.listarBicicletas()
+    public List<BicicletaResponse> listarBicicletas(
+            @RequestParam(required = false) StatusBicicleta status,
+            @RequestParam(required = false) Integer page,
+            @RequestParam(required = false) Integer size) {
+
+        return bicicletaService.listarBicicletas(status, page, size)
                 .stream()
                 .map(BicicletaResponse::new)
                 .toList();
@@ -57,4 +62,13 @@ public class BicicletaController {
 
         bicicletaService.deletarBicicleta(id);
     }
+
+    @PatchMapping("/{id}/status")
+    public BicicletaResponse alterarStatus(
+            @PathVariable Long id,
+            @Valid @RequestBody StatusBicicletaRequest dados) {
+
+        return new BicicletaResponse(bicicletaService.alterarStatus(id, dados.status()));
+    }
+
 }

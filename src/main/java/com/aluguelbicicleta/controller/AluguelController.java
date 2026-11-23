@@ -22,8 +22,13 @@ public class AluguelController {
     }
 
     @GetMapping
-    public List<AluguelResponse> listarAlugueis() {
-        return aluguelService.listarAlugueis()
+    public List<AluguelResponse> listarAlugueis(
+            @RequestParam(required = false) Boolean emAberto,
+            @RequestParam(required = false) Long clienteId,
+            @RequestParam(required = false) Integer page,
+            @RequestParam(required = false) Integer size) {
+
+        return aluguelService.listarAlugueis(emAberto, clienteId, page, size)
                 .stream()
                 .map(AluguelResponse::new)
                 .toList();
