@@ -35,7 +35,9 @@ public class ClienteService {
 
     public Cliente cadastrarCliente(ClienteRequest dados) {
 
-        if (clienteRepository.existsByCpf(dados.cpf())) {
+        String cpf = somenteDigitos(dados.cpf());
+
+        if (clienteRepository.existsByCpf(cpf)) {
             throw new RestricaoException(
                     "O CPF informado já está cadastrado."
             );
@@ -43,7 +45,7 @@ public class ClienteService {
 
         Cliente cliente = new Cliente(
                 dados.nome(),
-                dados.cpf(),
+                cpf,
                 dados.telefone()
         );
 
@@ -54,17 +56,23 @@ public class ClienteService {
 
         Cliente cliente = buscarPorId(id);
 
-        if (clienteRepository.existsByCpfAndIdNot(dados.cpf(), id)) {
+        String cpf = somenteDigitos(dados.cpf());
+
+        if (clienteRepository.existsByCpfAndIdNot(cpf, id)) {
             throw new RestricaoException(
                     "O CPF informado já pertence a outro cliente."
             );
         }
 
         cliente.setNome(dados.nome());
-        cliente.setCpf(dados.cpf());
+        cliente.setCpf(cpf);
         cliente.setTelefone(dados.telefone());
 
         return clienteRepository.save(cliente);
+    }
+
+    private String somenteDigitos(String cpf) {
+        return cpf.replaceAll("\\D", "");
     }
 
     public void deletarCliente(Long id) {

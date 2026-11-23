@@ -11,7 +11,12 @@ import com.aluguelbicicleta.model.enums.StatusBicicleta;
 import com.aluguelbicicleta.repository.BicicletaRepository;
 import com.aluguelbicicleta.repository.CategoriaBicicletaRepository;
 
+import com.aluguelbicicleta.exception.RestricaoException;
+
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
 import java.util.List;
 
@@ -28,8 +33,15 @@ public class BicicletaService {
         this.categoriaBicicletaRepository = categoriaBicicletaRepository;
     }
 
-    public List<Bicicleta> listarBicicletas() {
-        return bicicletaRepository.findAll();
+    public List<Bicicleta> listarBicicletas(StatusBicicleta status, Integer page, Integer size) {
+
+        Pageable pageable = criarPaginacao(page, size);
+
+        if (status != null) {
+            return bicicletaRepository.findByStatus(status, pageable);
+        }
+
+        return bicicletaRepository.findAll(pageable).getContent();
     }
 
     public Bicicleta buscarPorId(Long id) {
@@ -37,6 +49,16 @@ public class BicicletaService {
                 .orElseThrow(() -> new NotFoundException(
                         "Bicicleta não encontrada!"
                 ));
+    }
+
+    private Pageable criarPaginacao(Integer page, Integer size) {
+        Sort ordenacao = Sort.by("id");
+
+        if (page == null || size == null) {
+            return Pageable.unpaged(ordenacao);
+        }
+
+        return PageRequest.of(Math.max(page, 0), Math.max(size, 1), ordenacao);
     }
 
     private CategoriaBicicleta buscarCategoria(Long categoriaId) {
@@ -74,5 +96,26 @@ public class BicicletaService {
         Bicicleta bicicleta = buscarPorId(id);
 
         bicicletaRepository.delete(bicicleta);
+    }
+
+    public Bicicleta alterarStatus(Long id, StatusBicicleta novoStatus) {
+
+        Bicicleta bicicleta = buscarPorId(id);
+
+        if (bicicleta.getStatus() == StatusBicicleta.ALUGADA) {
+            throw new RestricaoException(
+                    "A bicicleta está alugada. Registre a devolução antes de alterar o status."
+            );
+        }
+
+        if (novoStatus == StatusBicicleta.ALUGADA) {
+            throw new RestricaoException(
+                    "O status ALUGADA só pode ser definido ao registrar um aluguel."
+            );
+        }
+
+        bicicleta.setStatus(novoStatus);
+
+        return bicicletaRepository.save(bicicleta);
     }
 }
