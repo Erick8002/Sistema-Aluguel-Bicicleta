@@ -18,15 +18,15 @@
         </div>
 
         <nav class="nav-menu">
-            <button class="nav-item active" data-section="alugueis">Aluguéis</button>
-            <button class="nav-item" data-section="bicicletas" disabled title="Em breve">Bicicletas</button>
-            <button class="nav-item" data-section="clientes" disabled title="Em breve">Clientes</button>
-            <button class="nav-item" data-section="categorias" disabled title="Em breve">Categorias</button>
-            <button class="nav-item" data-section="historico" disabled title="Em breve">Histórico</button>
+            <button class="nav-item active" data-tab="alugueis">Aluguéis</button>
+            <button class="nav-item" data-tab="bicicletas">Bicicletas</button>
+            <button class="nav-item" data-tab="clientes">Clientes</button>
+            <button class="nav-item" data-tab="categorias">Categorias</button>
+            <button class="nav-item" data-tab="historico">Histórico</button>
         </nav>
 
         <div class="sidebar-footer">
-            <span class="status-pill">API: /alugueis</span>
+            <span class="status-pill api-badge">API: /alugueis</span>
         </div>
     </aside>
 
@@ -39,51 +39,257 @@
             <button id="btn-atualizar" class="btn btn-secondary" type="button">Atualizar lista</button>
         </header>
 
-        <section class="metrics-grid" aria-label="Indicadores de aluguel">
-            <article class="metric-card">
-                <span>Total de Aluguéis</span>
-                <strong id="metric-total">0</strong>
-            </article>
-            <article class="metric-card">
-                <span>Em Andamento</span>
-                <strong id="metric-ativos">0</strong>
-            </article>
-            <article class="metric-card">
-                <span>Concluídos</span>
-                <strong id="metric-concluidos">0</strong>
-            </article>
-            <article class="metric-card">
-                <span>Receita Acumulada</span>
-                <strong id="metric-receita">R$ 0,00</strong>
-            </article>
+        <section id="tab-alugueis" class="tab-content">
+            <section class="metrics-grid" aria-label="Indicadores de aluguel">
+                <article class="metric-card">
+                    <span>Total de Aluguéis</span>
+                    <strong id="metric-total">0</strong>
+                </article>
+                <article class="metric-card">
+                    <span>Em Andamento</span>
+                    <strong id="metric-ativos">0</strong>
+                </article>
+                <article class="metric-card">
+                    <span>Concluídos</span>
+                    <strong id="metric-concluidos">0</strong>
+                </article>
+                <article class="metric-card">
+                    <span>Receita Acumulada</span>
+                    <strong id="metric-receita">R$ 0,00</strong>
+                </article>
+            </section>
+
+            <section class="content-grid">
+                <article class="card form-card">
+                    <h2>Novo Aluguel</h2>
+                    <p class="card-desc">Informe os IDs válidos para registrar uma nova locação.</p>
+
+                    <form id="form-aluguel" class="form-stack">
+                        <div class="field">
+                            <label for="clienteId">ID do Cliente</label>
+                            <input id="clienteId" name="clienteId" type="number" min="1" step="1" required placeholder="Ex.: 1" />
+                        </div>
+
+                        <div class="field">
+                            <label for="bicicletaId">ID da Bicicleta</label>
+                            <input id="bicicletaId" name="bicicletaId" type="number" min="1" step="1" required placeholder="Ex.: 1" />
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Registrar Aluguel</button>
+                    </form>
+
+                    <div id="feedback-box" class="feedback hidden" role="status"></div>
+                </article>
+
+                <article class="card table-card">
+                    <div class="table-header">
+                        <h2>Aluguéis Registrados</h2>
+                        <span id="contador-registros" class="badge-count">0 registros</span>
+                    </div>
+
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>#ID</th>
+                                <th>Cliente</th>
+                                <th>Bicicleta</th>
+                                <th>Início</th>
+                                <th>Fim</th>
+                                <th>Valor/h</th>
+                                <th>Total</th>
+                                <th>Status</th>
+                                <th>Ação</th>
+                            </tr>
+                            </thead>
+                            <tbody id="alugueis-tbody">
+                            <tr>
+                                <td colspan="9" class="empty-state">Carregando aluguéis...</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </article>
+            </section>
         </section>
 
-        <section class="content-grid">
-            <article class="card form-card">
-                <h2>Novo Aluguel</h2>
-                <p class="card-desc">Informe os IDs válidos para registrar uma nova locação.</p>
+        <section id="tab-clientes" class="tab-content hidden">
+            <section class="content-grid">
+                <article class="card form-card">
+                    <h2>Novo Cliente</h2>
+                    <p class="card-desc">Cadastre um cliente para vincular a novas locações.</p>
 
-                <form id="form-aluguel" class="form-stack">
-                    <div class="field">
-                        <label for="clienteId">ID do Cliente</label>
-                        <input id="clienteId" name="clienteId" type="number" min="1" step="1" required placeholder="Ex.: 1" />
+                    <form id="form-cliente" class="form-stack">
+                        <div class="field">
+                            <label for="cliente-nome">Nome</label>
+                            <input id="cliente-nome" name="nome" type="text" required placeholder="Ex.: Erick" />
+                        </div>
+
+                        <div class="field">
+                            <label for="cliente-cpf">CPF</label>
+                            <input
+                                    id="cliente-cpf"
+                                    name="cpf"
+                                    type="text"
+                                    required
+                                    placeholder="11 dígitos ou 000.000.000-00"
+                            />
+                        </div>
+
+                        <div class="field">
+                            <label for="cliente-telefone">Telefone</label>
+                            <input
+                                    id="cliente-telefone"
+                                    name="telefone"
+                                    type="text"
+                                    required
+                                    placeholder="Ex.: 43999999999"
+                            />
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Cadastrar Cliente</button>
+                    </form>
+
+                    <div id="cliente-feedback" class="feedback hidden" role="status"></div>
+                </article>
+
+                <article class="card table-card">
+                    <div class="table-header">
+                        <h2>Clientes Cadastrados</h2>
+                        <span id="clientes-count" class="badge-count">0 registros</span>
                     </div>
 
-                    <div class="field">
-                        <label for="bicicletaId">ID da Bicicleta</label>
-                        <input id="bicicletaId" name="bicicletaId" type="number" min="1" step="1" required placeholder="Ex.: 1" />
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>#ID</th>
+                                <th>Nome</th>
+                                <th>CPF</th>
+                                <th>Telefone</th>
+                                <th>Ação</th>
+                            </tr>
+                            </thead>
+                            <tbody id="clientes-tbody">
+                            <tr>
+                                <td colspan="5" class="empty-state">Nenhum cliente cadastrado até o momento.</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </article>
+            </section>
+        </section>
+
+        <section id="tab-bicicletas" class="tab-content hidden">
+            <section class="content-grid">
+                <article class="card form-card">
+                    <h2>Nova Bicicleta</h2>
+                    <p class="card-desc">Cadastre uma bicicleta vinculada a uma categoria.</p>
+
+                    <form id="form-bicicleta" class="form-stack">
+                        <div class="field">
+                            <label for="bicicleta-modelo">Modelo</label>
+                            <input id="bicicleta-modelo" name="modelo" type="text" maxlength="255" required placeholder="Ex.: Urbana Aro 29" />
+                        </div>
+
+                        <div class="field">
+                            <label for="bicicleta-categoria">Categoria</label>
+                            <select id="bicicleta-categoria" name="categoriaId" required>
+                                <option value="">Carregando categorias...</option>
+                            </select>
+                        </div>
+
+                        <p class="card-desc">A bicicleta será cadastrada com status disponível.</p>
+                        <button type="submit" class="btn btn-primary">Cadastrar Bicicleta</button>
+                    </form>
+
+                    <div id="bicicleta-feedback" class="feedback hidden" role="status"></div>
+                </article>
+
+                <article class="card table-card">
+                    <div class="table-header">
+                        <h2>Bicicletas Cadastradas</h2>
+                        <span id="bicicletas-count" class="badge-count">0 registros</span>
                     </div>
 
-                    <button type="submit" class="btn btn-primary">Registrar Aluguel</button>
-                </form>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>#ID</th>
+                                <th>Modelo</th>
+                                <th>Categoria</th>
+                                <th>Status</th>
+                                <th>Ação</th>
+                            </tr>
+                            </thead>
+                            <tbody id="bicicletas-tbody">
+                            <tr>
+                                <td colspan="5" class="empty-state">Carregando bicicletas...</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </article>
+            </section>
+        </section>
 
-                <div id="feedback-box" class="feedback hidden" role="status"></div>
-            </article>
+        <section id="tab-categorias" class="tab-content hidden">
+            <section class="content-grid">
+                <article class="card form-card">
+                    <h2>Nova Categoria</h2>
+                    <p class="card-desc">Defina o nome e o valor cobrado por hora.</p>
 
+                    <form id="form-categoria" class="form-stack">
+                        <div class="field">
+                            <label for="categoria-nome">Nome</label>
+                            <input id="categoria-nome" name="nome" type="text" maxlength="100" required placeholder="Ex.: Mountain bike" />
+                        </div>
+
+                        <div class="field">
+                            <label for="categoria-valor">Valor por hora (R$)</label>
+                            <input id="categoria-valor" name="valorPorHora" type="number" min="0.01" step="0.01" required placeholder="Ex.: 15,00" />
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Cadastrar Categoria</button>
+                    </form>
+
+                    <div id="categoria-feedback" class="feedback hidden" role="status"></div>
+                </article>
+
+                <article class="card table-card">
+                    <div class="table-header">
+                        <h2>Categorias Cadastradas</h2>
+                        <span id="categorias-count" class="badge-count">0 registros</span>
+                    </div>
+
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                            <tr>
+                                <th>#ID</th>
+                                <th>Nome</th>
+                                <th>Valor por hora</th>
+                                <th>Ação</th>
+                            </tr>
+                            </thead>
+                            <tbody id="categorias-tbody">
+                            <tr>
+                                <td colspan="4" class="empty-state">Carregando categorias...</td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </article>
+            </section>
+        </section>
+
+        <section id="tab-historico" class="tab-content hidden">
             <article class="card table-card">
                 <div class="table-header">
-                    <h2>Aluguéis Registrados</h2>
-                    <span id="contador-registros" class="badge-count">0 registros</span>
+                    <h2>Movimentações Registradas</h2>
+                    <span id="historico-count" class="badge-count">0 registros</span>
                 </div>
 
                 <div class="table-wrapper">
@@ -91,19 +297,17 @@
                         <thead>
                         <tr>
                             <th>#ID</th>
+                            <th>Tipo</th>
+                            <th>Aluguel</th>
                             <th>Cliente</th>
                             <th>Bicicleta</th>
-                            <th>Início</th>
-                            <th>Fim</th>
-                            <th>Valor/h</th>
-                            <th>Total</th>
-                            <th>Status</th>
-                            <th>Ação</th>
+                            <th>Valor</th>
+                            <th>Data e hora</th>
                         </tr>
                         </thead>
-                        <tbody id="alugueis-tbody">
+                        <tbody id="historico-tbody">
                         <tr>
-                            <td colspan="9" class="empty-state">Carregando aluguéis...</td>
+                            <td colspan="7" class="empty-state">Carregando histórico...</td>
                         </tr>
                         </tbody>
                     </table>
